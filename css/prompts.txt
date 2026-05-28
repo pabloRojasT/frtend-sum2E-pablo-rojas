@@ -1,0 +1,288 @@
+etapa 1  landing page completa
+
+commit: el contexto del archivo es que es una pagina web de un consultorio medico llamado SaludPlus que ofrece atencion en distintas especialidades. La clinica busca
+modernizar su presencia digital con un sitio web que muestre sus servicios, el equipo medico y permita a los
+pacientes solicitar turnos en linea de manera sencilla y rapida. ya con ese contexto sabido crea un encabezado (header) el cual tenga el Logo o nombre de la clinica: "SaludPlus", Menu de navegacion con enlaces a las secciones de la pagina (navegacion interna con anclas):
+Inicio, Especialidades, Medicos, Obras Sociales, Contacto,
+e menu debe permanecer visible al hacer scroll (position: sticky o fixed). 
+
+resultado: index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludPlus - Clínica Médica Moderna</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- HEADER / ENCABEZADO -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>SaludPlus</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#especialidades">Especialidades</a></li>
+                    <li><a href="#medicos">Médicos</a></li>
+                    <li><a href="#obras-sociales">Obras Sociales</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+explicacion: la respuesta que dio el copilot chat permitio crear lo que seria el encabezado de la pagina lo cual es lo primordial 
+y lo primero que ve una persona al entrar en esta misma justo con pequeñas secciones que estan arriba a la derecha que desplaza
+la pagina segun lo que quiere ver el usuario
+
+commit: siguiendo con una seccion Hero el cual contenga Imagen de fondo o fondo de color con degradado (CSS), un titulo principal y 
+subtitulo descriptivo, junto con un Boton de llamada a la accion: "Solicitar turno" que redirija a turnos.html y finalmente indicadores de confianza:
+ al menos 3 datos destacados (ej. cantidad de especialidades, anos de
+experiencia, pacientes atendidos).
+
+resultado:  <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Tu Salud es Nuestra Prioridad</h2>
+            <p class="hero-subtitle">Atención médica de calidad con especialistas altamente capacitados</p>
+            <a href="turnos.html" class="btn-primary">Solicitar Turno</a>
+        </div>
+
+        <!-- Indicadores de Confianza -->
+        <div class="trust-indicators">
+            <div class="indicator">
+                <h3>15+</h3>
+                <p>Especialidades Médicas</p>
+            </div>
+            <div class="indicator">
+                <h3>25</h3>
+                <p>Años de Experiencia</p>
+            </div>
+            <div class="indicator">
+                <h3>50,000+</h3>
+                <p>Pacientes Atendidos</p>
+            </div>
+        </div>
+    </section>
+
+explicacion: este resultado permite ya tener un subtitulo que le sigue al anterior el cual muestra los servicios que contiene la clinica
+como lo pueden ser los indicadores de confianza
+
+commit: tambien que contenga especialidades medicas
+• Grilla con al menos 6 especialidades disponibles (ej. Clinica General, Cardiologia, Pediatria,
+Ginecologia, Traumatologia, Neurologia).
+• Cada especialidad debe mostrar un icono o imagen representativa, nombre y breve descripcion.
+• Layout implementado con CSS Grid (minimo 3 columnas en pantallas grandes). tambien que tenga otra seccion la cual sea Nuestros Medicos
+• Seccion con al menos 3 profesionales del equipo medico.
+• Cada tarjeta debe incluir: nombre completo, especialidad, breve descripcion o frase.
+• Placeholder de imagen (puede ser un div con fondo de color o imagen generica).
+• Layout con Flexbox. 
+
+resultado: <section id="especialidades" class="especialidades">
+        <div class="container">
+            <h2 class="section-title">Nuestras Especialidades</h2>
+            <p class="section-subtitle">Contamos con profesionales especializados en diferentes áreas de la medicina</p>
+
+            <div class="especialidades-grid">
+                <div class="especialidad-card">
+                    <div class="icon">🏥</div>
+                    <h3>Clínica General</h3>
+                    <p>Atención médica integral para toda la familia con diagnóstico y seguimiento de enfermedades comunes.</p>
+                </div>
+
+                <div class="especialidad-card">
+                    <div class="icon">❤️</div>
+                    <h3>Cardiología</h3>
+                    <p>Diagnóstico y tratamiento de enfermedades del corazón y del sistema cardiovascular.</p>
+                </div>
+
+                <div class="especialidad-card">
+                    <div class="icon">👶</div>
+                    <h3>Pediatría</h3>
+                    <p>Cuidado médico especializado para bebés, niños y adolescentes.</p>
+                </div>
+
+                <div class="especialidad-card">
+                    <div class="icon">👩‍⚕️</div>
+                    <h3>Ginecología</h3>
+                    <p>Atención integral de la salud de la mujer en todas sus etapas de vida.</p>
+                </div>
+
+                <div class="especialidad-card">
+                    <div class="icon">🦴</div>
+                    <h3>Traumatología</h3>
+                    <p>Diagnóstico y tratamiento de lesiones musculoesqueléticas y óseas.</p>
+                </div>
+
+                <div class="especialidad-card">
+                    <div class="icon">🧠</div>
+                    <h3>Neurología</h3>
+                    <p>Especialista en trastornos del sistema nervioso central y periférico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE MÉDICOS -->
+    <section id="medicos" class="medicos">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo Médico</h2>
+            <p class="section-subtitle">Profesionales dedicados a tu bienestar</p>
+
+            <div class="medicos-container">
+                <div class="doctor-card">
+                    <div class="doctor-image">DR</div>
+                    <h3 class="doctor-name">Dr. Carlos González</h3>
+                    <p class="doctor-specialty">Cardiología</p>
+                    <p class="doctor-description">"La salud del corazón es la salud de la vida"</p>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">DRA</div>
+                    <h3 class="doctor-name">Dra. María Fernández</h3>
+                    <p class="doctor-specialty">Ginecología y Obstetricia</p>
+                    <p class="doctor-description">"Acompañando a las mujeres en cada etapa"</p>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">DR</div>
+                    <h3 class="doctor-name">Dr. Roberto Martínez</h3>
+                    <p class="doctor-specialty">Pediatría</p>
+                    <p class="doctor-description">"Cuidando la salud de nuestros niños"</p>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-image">DRA</div>
+                    <h3 class="doctor-name">Dra. Patricia López</h3>
+                    <p class="doctor-specialty">Neurología</p>
+                    <p class="doctor-description">"La mente es el centro de nuestra salud"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+explicacion: dentro de estas secciones las personas permiten ver las diferentes secciones que tiene el consultorio como lo pueden
+ser los medicos al igual que las especialidades que aborda la clinica como la Ginecologia, traumatologia, etc.
+
+commit: ahora dame otra seccion que le siga seria Obras Sociales
+• Lista o grilla con al menos 6 obras sociales y/o prepagas aceptadas (ej. OSDE, Swiss Medical,
+Galeno, IOMA, Medicus, Sancor Salud).
+• Presentacion clara con nombre de cada cobertura. y la ultima seccion seria Contacto y Footer
+• Datos de contacto: direccion, telefono, email, horario de atencion.
+• Mapa placeholder (un div con texto o imagen representativa).
+• Footer con derechos reservados y nombre del autor.
+
+resultado: <!-- SECCIÓN DE OBRAS SOCIALES -->
+    <section id="obras-sociales" class="obras-sociales">
+        <div class="container">
+            <h2 class="section-title">Obras Sociales Aceptadas</h2>
+            <p class="section-subtitle">Trabajamos con las principales coberturas médicas del país</p>
+
+            <div class="obras-grid">
+                <div class="obra-social">
+                    <h3>OSDE</h3>
+                    <p>Cobertura nacional</p>
+                </div>
+
+                <div class="obra-social">
+                    <h3>Swiss Medical</h3>
+                    <p>Prepaga de calidad</p>
+                </div>
+
+                <div class="obra-social">
+                    <h3>Galeno</h3>
+                    <p>Plan de salud integral</p>
+                </div>
+
+                <div class="obra-social">
+                    <h3>IOMA</h3>
+                    <p>Obra social IOMA</p>
+                </div>
+
+                <div class="obra-social">
+                    <h3>Medicus</h3>
+                    <p>Cobertura médica</p>
+                </div>
+
+                <div class="obra-social">
+                    <h3>Sancor Salud</h3>
+                    <p>Prepaga nacional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section id="contacto" class="contacto">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <p class="section-subtitle">¿Tienes preguntas? Estamos aquí para ayudarte</p>
+
+            <div class="contacto-content">
+                <div class="contacto-info">
+                    <div class="info-item">
+                        <h3>📍 Dirección</h3>
+                        <p>Av. Libertador 1234, Buenos Aires, Argentina</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>📞 Teléfono</h3>
+                        <p>(011) 4567-8900</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>✉️ Email</h3>
+                        <p>contacto@saludplus.com.ar</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h3>🕐 Horario de Atención</h3>
+                        <p>Lunes a Viernes: 08:00 - 20:00 hs<br>
+                        Sábado: 09:00 - 14:00 hs<br>
+                        Domingo: Cerrado</p>
+                    </div>
+                </div>
+
+                <div class="mapa-placeholder">
+                    <div class="mapa-content">
+                        📍 Ubicación de SaludPlus
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SaludPlus - Clínica Médica. Todos los derechos reservados.</p>
+            <p>Diseño y desarrollo por: <strong>Pablo Rojas</strong></p>
+        </div>
+    </footer>
+</body>
+</html>
+
+explicacion: permite tener las diferentes obras sociales que estan relacionadas como cobertura nacional, plan de salud integral, etc 
+y diferentes versiones de contacto como correo, telefono, direccion,etc.
+
+commit: para el estilo que debe tener la pagina
+• Usar CSS Grid para la seccion de Especialidades.
+• Usar Flexbox para el header y la seccion de Medicos.
+• Paleta de colores coherente y profesional, acorde a un sitio medico.
+• Fuentes legibles; se puede usar Google Fonts (max. 2 familias).
+• El sitio debe verse correctamente en pantallas de al menos 1024px de ancho.
+
+resultado: La página ahora tiene una paleta más limpia y profesional con tonos médicos:
+--primary-color: #0066cc
+--secondary-color: #0d8bbd
+--accent-color: #0097a7
+Se mantiene el uso de:
+Flexbox en el header y en la sección Médicos
+CSS Grid en la sección Especialidades
+Añadí soporte explícito para pantallas de 1024px y más en la grilla de especialidades.
+
+explicacion: aca tocaria la parte mas visual donde el usuario podria ver una paleta de colores que permiten ver al consultorio
+de una forma mas profesional junto con soporte de para pantallas de 1024x.
