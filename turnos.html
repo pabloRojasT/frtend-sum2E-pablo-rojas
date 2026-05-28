@@ -88,7 +88,7 @@
                             <label for="especialidad">Especialidad *</label>
                             <select id="especialidad" name="especialidad" required>
                                 <option value="">Selecciona una especialidad</option>
-                                <option value="clinica-general">Clínica General</option>
+                                <option value="clinica">Clínica General</option>
                                 <option value="cardiologia">Cardiología</option>
                                 <option value="pediatria">Pediatría</option>
                                 <option value="ginecologia">Ginecología</option>
@@ -213,137 +213,11 @@
                     </div>
                 </fieldset>
             </form>
+            <div id="confirmacion-turno" class="confirmacion" style="display:none;"></div>
         </div>
     </section>
 
-    <script>
-        const especialidadMedicos = {
-            'clinica-general': [
-                { value: 'dr-gustavo-sanchez', label: 'Dr. Gustavo Sánchez' },
-                { value: 'dra-lucia-vargas', label: 'Dra. Lucía Vargas' }
-            ],
-            'cardiologia': [
-                { value: 'dr-carlos-gonzalez', label: 'Dr. Carlos González' },
-                { value: 'dra-paula-martinez', label: 'Dra. Paula Martínez' }
-            ],
-            'pediatria': [
-                { value: 'dra-maria-fernandez', label: 'Dra. María Fernández' },
-                { value: 'dr-santiago-rios', label: 'Dr. Santiago Ríos' }
-            ],
-            'ginecologia': [
-                { value: 'dra-patricia-lopez', label: 'Dra. Patricia López' },
-                { value: 'dra-carolina-pena', label: 'Dra. Carolina Peña' }
-            ],
-            'traumatologia': [
-                { value: 'dr-andres-soto', label: 'Dr. Andrés Soto' },
-                { value: 'dra-monica-alarcon', label: 'Dra. Mónica Alarcón' }
-            ],
-            'neurologia': [
-                { value: 'dr-roberto-martinez', label: 'Dr. Roberto Martínez' },
-                { value: 'dra-victoria-rios', label: 'Dra. Victoria Ríos' }
-            ]
-        };
-
-        const especialidadSelect = document.getElementById('especialidad');
-        const medicoSelect = document.getElementById('medico');
-        const modalidadSelect = document.getElementById('modalidad');
-        const plataformaGroup = document.getElementById('plataforma-group');
-        const plataformaSelect = document.getElementById('plataforma');
-        const coberturaSelect = document.getElementById('cobertura');
-        const credencialGroup = document.getElementById('credencial-group');
-        const planGroup = document.getElementById('plan-group');
-        const numeroCredencial = document.getElementById('numero-credencial');
-        const planInput = document.getElementById('plan');
-        const primeraVisitaCheckbox = document.getElementById('primera-visita');
-        const conocioGroup = document.getElementById('conocio-group');
-        const conocioSelect = document.getElementById('como-nos-conocio');
-        const estudiosPreviosCheckbox = document.getElementById('estudios-previos');
-        const descripcionEstudiosGroup = document.getElementById('descripcion-estudios-group');
-        const descripcionEstudios = document.getElementById('descripcion-estudios');
-
-        function updateMedicoOptions() {
-            const selectedEspecialidad = especialidadSelect.value;
-            medicoSelect.innerHTML = '';
-            if (!selectedEspecialidad || !especialidadMedicos[selectedEspecialidad]) {
-                medicoSelect.disabled = true;
-                medicoSelect.innerHTML = '<option value="">Selecciona una especialidad primero</option>';
-                return;
-            }
-
-            medicoSelect.disabled = false;
-            medicoSelect.innerHTML = '<option value="">Selecciona un médico</option>';
-            especialidadMedicos[selectedEspecialidad].forEach(medico => {
-                const option = document.createElement('option');
-                option.value = medico.value;
-                option.textContent = medico.label;
-                medicoSelect.appendChild(option);
-            });
-        }
-
-        function updateModalidad() {
-            const modalidad = modalidadSelect.value;
-            if (modalidad === 'videoconsulta') {
-                plataformaGroup.classList.remove('hidden');
-                plataformaSelect.setAttribute('required', 'required');
-            } else {
-                plataformaGroup.classList.add('hidden');
-                plataformaSelect.removeAttribute('required');
-                plataformaSelect.value = '';
-            }
-        }
-
-        function updateCobertura() {
-            const cobertura = coberturaSelect.value;
-            if (cobertura && cobertura !== 'particular') {
-                credencialGroup.classList.remove('hidden');
-                planGroup.classList.remove('hidden');
-                numeroCredencial.setAttribute('required', 'required');
-                planInput.setAttribute('required', 'required');
-            } else {
-                credencialGroup.classList.add('hidden');
-                planGroup.classList.add('hidden');
-                numeroCredencial.removeAttribute('required');
-                planInput.removeAttribute('required');
-                numeroCredencial.value = '';
-                planInput.value = '';
-            }
-        }
-
-        function updatePrimeraVisita() {
-            if (primeraVisitaCheckbox.checked) {
-                conocioGroup.classList.remove('hidden');
-                conocioSelect.setAttribute('required', 'required');
-            } else {
-                conocioGroup.classList.add('hidden');
-                conocioSelect.removeAttribute('required');
-                conocioSelect.value = '';
-            }
-        }
-
-        function updateEstudiosPrevios() {
-            if (estudiosPreviosCheckbox.checked) {
-                descripcionEstudiosGroup.classList.remove('hidden');
-                descripcionEstudios.setAttribute('required', 'required');
-            } else {
-                descripcionEstudiosGroup.classList.add('hidden');
-                descripcionEstudios.removeAttribute('required');
-                descripcionEstudios.value = '';
-            }
-        }
-
-        especialidadSelect.addEventListener('change', updateMedicoOptions);
-        modalidadSelect.addEventListener('change', updateModalidad);
-        coberturaSelect.addEventListener('change', updateCobertura);
-        primeraVisitaCheckbox.addEventListener('change', updatePrimeraVisita);
-        estudiosPreviosCheckbox.addEventListener('change', updateEstudiosPrevios);
-        document.addEventListener('DOMContentLoaded', () => {
-            updateMedicoOptions();
-            updateModalidad();
-            updateCobertura();
-            updatePrimeraVisita();
-            updateEstudiosPrevios();
-        });
-    </script>
+    <script src="js/validaciones.js"></script>
 
     <!-- FOOTER -->
     <footer class="footer">

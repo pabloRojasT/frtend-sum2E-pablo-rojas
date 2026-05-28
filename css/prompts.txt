@@ -1219,3 +1219,133 @@ textarea {
 explicacion: se aplican los requerimientos que seria que el formulario este centrado, cada fieldset tenga su borde suave
 y su fondo diferenciado, agregan otros estilos como hover y focus y el boton reset ahora usa la clave de .reset porque
 antes era estilo inline
+
+etapa 3 Validaciones JavaScript
+
+prompt: en el archivo de validaciones debe haber clases CSS para feedback visual
+Define en turnos.css las siguientes clases y aplicalas desde JavaScript:
+• campo-error: borde rojo, fondo rojo muy claro. Indica que el campo tiene un error.
+• campo-ok: borde verde, fondo verde muy claro. Indica que el campo es valido.
+• mensaje-error: texto de error pequeno de color rojo, visible debajo del campo.
+Reglas de validacion por campo
+Seccion 1 - Datos del paciente
+• Nombre y Apellido: obligatorio, solo letras y espacios (incluye tildes y ene). Expresion regular
+sugerida: /^[a-zA-ZaeiouAEIOUuUnnNN\s]+$/
+• DNI: obligatorio, entre 7 y 8 digitos numericos.
+• Email: obligatorio, formato valido (usar expresion regular).
+• Telefono: obligatorio, formato valido (puede contener +, guiones y espacios, minimo 8 digitos).
+• Fecha de nacimiento: obligatoria, no puede ser una fecha futura, la edad debe estar entre 0 y 120
+anos.
+Seccion 2 - Datos del turno
+• Especialidad: obligatoria (no puede quedar en la opcion vacia inicial).
+• Medico: obligatorio una vez que la especialidad esta seleccionada. Las opciones del select deben
+actualizarse dinamicamente al cambiar la especialidad, usando un objeto JavaScript con los
+medicos de cada especialidad.
+• Tipo de consulta: obligatorio.
+• Fecha del turno: obligatoria, no puede ser una fecha pasada, debe tener al menos 24 horas de
+anticipacion desde el momento actual, y debe corresponder a un dia de semana (lunes a viernes;
+rechazar sabados y domingos).
+• Hora del turno: obligatoria, debe estar dentro del horario de atencion (08:00 a 20:00).
+• Modalidad: obligatoria.
+• Plataforma preferida: obligatoria si la modalidad es "Videoconsulta".
+Seccion 3 - Cobertura medica
+• Cobertura: obligatoria. • Numero de credencial: obligatorio si la cobertura NO es "Particular". Debe tener al menos 5
+caracteres alfanumericos.
+• Plan: obligatorio si la cobertura NO es "Particular".
+Seccion 4 - Informacion adicional
+• Como nos conocio: obligatorio si el checkbox de primera visita esta marcado.
+• Motivo de consulta: obligatorio, minimo 20 caracteres.
+• Descripcion de estudios: obligatoria si el checkbox de estudios previos esta marcado; minimo 20
+caracteres.
+
+resultado: Ajustando el CSS para feedback visual y moviendo la lógica de validación al archivo externo validaciones.js.
+
+Voy a limpiar las cadenas de texto para evitar caracteres corruptos y dejar la validación con acentos seguros.
+
+Hecho
+Archivos actualizados
+turnos.css
+
+Añadí clases de feedback:
+.campo-error
+.campo-ok
+.mensaje-error
+Las reglas de campos ocultos ya usan display: none por defecto.
+Mantuve los estilos de hover y focus para inputs, selects y textareas.
+validaciones.js
+
+Implementé validación completa por campo según las reglas:
+Sección 1: Nombre, Apellido, DNI, Email, Teléfono, Fecha de nacimiento
+Sección 2: Especialidad, Médico dinámico, Tipo de consulta, Fecha + hora, Modalidad, Plataforma
+Sección 3: Cobertura, Número de credencial, Plan
+Sección 4: Cómo nos conoció, Motivo de consulta, Descripción de estudios
+El formulario ahora:
+marca inputs inválidos con .campo-error
+marca inputs válidos con .campo-ok
+muestra mensajes de error debajo del campo con .mensaje-error
+Validaciones dinámicas:
+Médico habilitado solo después de seleccionar Especialidad
+Plataforma visible/requerido solo para Videoconsulta
+Credencial y Plan visibles/requeridos sólo si la cobertura no es Particular
+Cómo nos conoció visible/requerido sólo si Primera visita está marcada
+Descripción de estudios visible/requerido sólo si Estudios previos está marcado
+turnos.html
+
+Reemplacé el script inline por:
+<script src="js/validaciones.js"></script>
+
+explicacion: en este archivo permite que dentro del archivo de turnos y para el formulario se encuentren validaciones 
+segun el campo que hay desde la seccion 1 que trata de nombre, apellido, dni, etc hasta la seccion 4 de como conocio la consulta
+
+prompt: Comportamiento del formulario debe ser con
+Campos condicionales
+Los siguientes campos deben mostrarse y ocultarse dinamicamente mediante JavaScript (modificando
+display: none / display: block):
+• Medico: se habilita y actualiza sus opciones cuando el usuario selecciona una especialidad.
+• Plataforma preferida: se muestra solo cuando la modalidad seleccionada es "Videoconsulta".
+• Numero de credencial y Plan: se muestran cuando la cobertura es distinta de "Particular".
+• Como nos conocio: se muestra cuando el checkbox de primera visita esta marcado.
+• Descripcion de estudios: se muestra cuando el checkbox de estudios previos esta marcado.
+Manejo del submit
+• Usar preventDefault() para evitar el envio del formulario por defecto.
+• Recorrer todos los campos y aplicar campo-error o campo-ok segun corresponda.
+• Si existe al menos un error, usar element.scrollIntoView({ behavior: "smooth" }) para desplazarse al
+primer campo invalido.
+• Si todos los campos son validos, mostrar un mensaje de confirmacion en pantalla con un numero de
+turno generado con Math.random() (formato: TURN-XXXXX, donde X son digitos).
+• El mensaje de confirmacion debe incluir: nombre del paciente, especialidad, fecha y hora del turno,
+y el numero de turno generado.
+Objeto de medicos por especialidad
+Define en validaciones.js un objeto JavaScript con la siguiente estructura (completa con al menos 2 medicos
+por especialidad):
+const medicosPorEspecialidad = {
+"clinica": ["Dr. Gomez, Carlos", "Dra. Lopez, Maria"],
+"cardiologia": ["Dr. Perez, Juan", "Dra. Torres, Ana"],
+"pediatria": ["Dra. Diaz, Laura", "Dr. Soto, Pablo"],
+"ginecologia": ["Dra. Romero, Valeria", "Dra. Castro, Elena"],
+"traumatologia": ["Dr. Ramos, Sergio", "Dr. Herrera, Diego"],
+"neurologia": ["Dr. Molina, Andres", "Dra. Vargas, Cecilia"]
+};
+
+resultado: Cambios realizados
+validaciones.js
+
+Reemplacé el objeto antiguo especialidadMedicos por medicosPorEspecialidad con la estructura solicitada.
+Actualicé updateMedicoOptions() para usar medicosPorEspecialidad y poblar el <select id="medico"> con valores de médico correctos.
+Corregí textos con codificación dañada (Ingrese un correo válido, Selecciona un médico).
+Añadí lógica de confirmación en el formulario, manteniendo event.preventDefault() y mostrando el contenedor de confirmación.
+turnos.html
+
+Ajusté el valor de la opción Clínica General a clinica para que coincida con la nueva clave del objeto JS.
+Agregué el contenedor:
+<div id="confirmacion-turno" class="confirmacion" style="display:none;"></div>
+turnos.css
+
+Añadí estilos para el mensaje de confirmación (.confirmacion, .confirmacion-mensaje).
+Verificación
+validaciones.js: sin errores detectados
+turnos.html: sin errores detectados
+
+explicacion: aca seria lo ultimo donde ocurren los ultimos cambios como por ejemplo el remplazo de 
+ el objeto antiguo especialidadMedicos por medicosporespecialidad y correcion de textos con codificación dañada 
+ como Ingrese un correo válido, Selecciona un médico entre otras funciones para que toda la pagina funcione correctamente
